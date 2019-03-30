@@ -9,7 +9,8 @@
 
 class RightHand : public Entity
 {
-
+public:
+    explicit RightHand(unsigned long id): Entity(id) {};
 };
 
 #endif //CACTUS_PICKER_RIGHTHAND_H
