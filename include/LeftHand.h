@@ -5,12 +5,10 @@
 #ifndef CACTUS_PICKER_LEFTHAND_H
 #define CACTUS_PICKER_LEFTHAND_H
 
-#include "Entity.h"
-
-class LeftHand : public Entity
+class LeftHand
 {
 public:
-    explicit LeftHand(unsigned long id): Entity(id) {};
+    explicit LeftHand()=default;
 };
 
 #endif //CACTUS_PICKER_LEFTHAND_H

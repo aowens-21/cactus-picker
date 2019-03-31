@@ -8,7 +8,6 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
 #include "GameStateSystem.h"
-#include "EntityManagementSystem.h"
 
 class Game
 {
@@ -21,9 +20,6 @@ private:
 
     // Keeping track of if the game is still running
     bool is_running = true;
-
-    // Our entity management system connects entities to this game
-    EntityManagementSystem entity_management_system {};
 public:
     Game();
 
@@ -32,12 +28,6 @@ public:
 
     // Runs main loop based on the game state
     void run_main_loop(const GameState& state);
-
-    // Registers entity
-    void register_entity(const Entity& entity) { entity_management_system.register_entity(entity); }
-
-    // Returns unique id for entities
-    unsigned long get_uid() { return entity_management_system.get_id(); }
 };
 
 #endif //CACTUS_PICKER_GAME_H

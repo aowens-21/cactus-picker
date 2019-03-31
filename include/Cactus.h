@@ -5,12 +5,10 @@
 #ifndef CACTUS_PICKER_CACTUS_H
 #define CACTUS_PICKER_CACTUS_H
 
-#include "Entity.h"
-
-class Cactus : public Entity
+class Cactus
 {
 public:
-    explicit Cactus(unsigned long id): Entity(id) {}
+    explicit Cactus()=default;
 };
 
 #endif //CACTUS_PICKER_CACTUS_H
