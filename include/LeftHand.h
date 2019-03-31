@@ -11,6 +11,8 @@ class LeftHand : public Hand
 {
 public:
     LeftHand(float x, float y): Hand(x, y, "../images/left_hand.png") {};
+
+    void update();
 };
 
 #endif //CACTUS_PICKER_LEFTHAND_H

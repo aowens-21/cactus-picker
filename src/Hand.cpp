@@ -18,6 +18,9 @@ Hand::Hand(float x, float y, const std::string &texture_path)
     rect.height = texture.getSize().y;
 
     sprite.setPosition(x, y);
+
+    initial_position.x = x;
+    initial_position.y = y;
 }
 
 void Hand::draw(sf::RenderWindow &window)

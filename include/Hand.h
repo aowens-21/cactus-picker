@@ -11,11 +11,10 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 
 constexpr const float INIT_VERTICAL_VELOCITY = 10.0;
-constexpr const float GRAVITY = 2.0;
 
 class Hand
 {
-private:
+protected:
     // For vertical movement speed
     float vertical_velocity = INIT_VERTICAL_VELOCITY;
 
@@ -25,7 +24,13 @@ private:
 
     // Rect for collision and physics
     sf::FloatRect rect;
+
+    // Keeping track of initial x and y position
+    sf::Vector2f initial_position;
 public:
+    // Gravity force
+    static constexpr float GRAVITY = 2.0;
+
     Hand(float x, float y, const std::string& texture_path);
 
     // Draw will render our sprite
