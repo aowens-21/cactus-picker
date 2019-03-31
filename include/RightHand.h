@@ -5,10 +5,12 @@
 #ifndef CACTUS_PICKER_RIGHTHAND_H
 #define CACTUS_PICKER_RIGHTHAND_H
 
-class RightHand
+#include "Hand.h"
+
+class RightHand : public Hand
 {
 public:
-    explicit RightHand()=default;
+    RightHand(float x, float y): Hand(x, y, "../images/right_hand.png") {};
 };
 
 #endif //CACTUS_PICKER_RIGHTHAND_H

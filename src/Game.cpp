@@ -22,5 +22,10 @@ void Game::run_main_loop(const GameState &state)
     }
 
     window.clear();
+
+    left_hand.draw(window);
+    right_hand.draw(window);
+    cactus.draw(window);
+
     window.display();
 }

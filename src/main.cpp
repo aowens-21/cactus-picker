@@ -11,10 +11,6 @@ int main()
     Game game {};
     GameStateSystem state_system {};
 
-    LeftHand left_hand {};
-    RightHand right_hand {};
-    Cactus cactus {};
-
     // Start the game loop
     while (game.is_game_running())
     {

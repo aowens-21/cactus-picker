@@ -5,10 +5,21 @@
 #ifndef CACTUS_PICKER_CACTUS_H
 #define CACTUS_PICKER_CACTUS_H
 
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Texture.hpp>
+
 class Cactus
 {
+private:
+    sf::Texture texture;
+    sf::Sprite sprite;
+
+    sf::FloatRect rect;
 public:
-    explicit Cactus()=default;
+    Cactus(float x, float y);
+
+    void draw(sf::RenderWindow& window);
 };
 
 #endif //CACTUS_PICKER_CACTUS_H
