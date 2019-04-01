@@ -43,22 +43,25 @@ void Hand::process_ascent()
 
 void Hand::process_descent()
 {
-    // If we aren't ascending, the ascent velocity needs to be reset
-    ascent_velocity = INIT_ASCENT_VELOCITY;
-
-    // While we haven't hit the ground, fall
-    if (rect.top < initial_position.y)
+    // Only fall if not grabbing
+    if (!grabbing && !recovering_from_grab)
     {
-        if (descent_velocity < MAX_FALL_VELOCITY)
+        // If we aren't ascending, the ascent velocity needs to be reset
+        ascent_velocity = INIT_ASCENT_VELOCITY;
+
+        // While we haven't hit the ground, fall
+        if (rect.top < initial_position.y)
         {
-            descent_velocity += ACCELERATION;
-        }
+            if (descent_velocity < MAX_FALL_VELOCITY)
+            {
+                descent_velocity += ACCELERATION;
+            }
 
-        rect.top += descent_velocity;
-    }
-    else
-    {
-        rect.top = initial_position.y;
+            rect.top += descent_velocity;
+        } else
+        {
+            rect.top = initial_position.y;
+        }
     }
 }
 

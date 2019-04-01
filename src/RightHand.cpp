@@ -4,6 +4,7 @@
 
 #include <SFML/Window/Keyboard.hpp>
 #include "../include/RightHand.h"
+#include "../include/Cactus.h"
 
 void RightHand::process_grab_movement(const sf::FloatRect& cactus_rect)
 {
@@ -26,11 +27,10 @@ void RightHand::process_grab_movement(const sf::FloatRect& cactus_rect)
             recovering_from_grab = false;
             rect.left = initial_position.x;
         }
-        process_descent();
     }
 }
 
-void RightHand::update(const sf::FloatRect& cactus_rect)
+void RightHand::update(Cactus &cactus)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
     {
@@ -41,7 +41,8 @@ void RightHand::update(const sf::FloatRect& cactus_rect)
         process_descent();
     }
 
-    process_grab_movement(cactus_rect);
+    process_grab_movement(cactus.get_rect());
+    cactus.handle_spike_collisions(this);
 
     sprite.setPosition(rect.left, rect.top);
 }

@@ -57,6 +57,10 @@ public:
 
     // Sets grabbing state as true
     void grab();
+
+    sf::FloatRect get_rect() const { return rect; }
+
+    virtual ~Hand()= default;
 };
 
 #endif //CACTUS_PICKER_HAND_H

@@ -34,8 +34,9 @@ void Game::run_main_loop(const GameState &state)
 
     window.clear();
 
-    right_hand.update(cactus.get_rect());
-    left_hand.update(cactus.get_rect());
+    right_hand.update(cactus);
+    left_hand.update(cactus);
+    cactus.update();
 
     left_hand.draw(window);
     right_hand.draw(window);
