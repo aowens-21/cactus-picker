@@ -10,8 +10,6 @@
 #include <string>
 #include <SFML/Graphics/RenderWindow.hpp>
 
-constexpr const float INIT_VERTICAL_VELOCITY = 10.0;
-
 class Hand
 {
 protected:
@@ -28,7 +26,6 @@ protected:
 
     // Speed of grab motion
     static constexpr const float GRAB_VELOCITY = 25.0;
-    static constexpr const float RECOVERY_VELOCITY = 40.0;
 
     // Sprite for the hand
     sf::Texture texture;

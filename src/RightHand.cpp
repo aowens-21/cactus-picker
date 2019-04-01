@@ -26,6 +26,7 @@ void RightHand::process_grab_movement(const sf::FloatRect& cactus_rect)
             recovering_from_grab = false;
             rect.left = initial_position.x;
         }
+        process_descent();
     }
 }
 
