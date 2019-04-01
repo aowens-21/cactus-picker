@@ -6,6 +6,7 @@
 #define CACTUS_PICKER_RIGHTHAND_H
 
 #include "Hand.h"
+#include "Cactus.h"
 #include <SFML/Graphics/Sprite.hpp>
 
 class RightHand : public Hand
@@ -15,7 +16,7 @@ private:
 public:
     RightHand(float x, float y): Hand(x, y, "../images/right_hand.png") {};
 
-    void update(const sf::FloatRect& cactus_rect);
+    void update(Cactus &cactus);
 };
 
 #endif //CACTUS_PICKER_RIGHTHAND_H

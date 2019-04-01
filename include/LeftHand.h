@@ -6,6 +6,7 @@
 #define CACTUS_PICKER_LEFTHAND_H
 
 #include "Hand.h"
+#include "Cactus.h"
 
 class LeftHand : public Hand
 {
@@ -15,7 +16,7 @@ public:
     LeftHand(float x, float y): Hand(x, y, "../images/left_hand.png") {};
 
     // Handles movement logic
-    void update(const sf::FloatRect& cactus_rect);
+    void update(Cactus &cactus);
 };
 
 #endif //CACTUS_PICKER_LEFTHAND_H
