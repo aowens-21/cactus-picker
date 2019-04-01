@@ -27,3 +27,45 @@ void Hand::draw(sf::RenderWindow &window)
 {
     window.draw(sprite);
 }
+
+void Hand::process_ascent()
+{
+    // Reset the descent velocity since we aren't yet falling
+    descent_velocity = GRAVITY;
+    // While ascent velocity is not at max, we keep increasing it
+    if (ascent_velocity < MAX_VELOCITY)
+    {
+        ascent_velocity += ACCELERATION;
+    }
+
+    rect.top -= ascent_velocity;
+}
+
+void Hand::process_descent()
+{
+    // If we aren't ascending, the ascent velocity needs to be reset
+    ascent_velocity = INIT_ASCENT_VELOCITY;
+
+    // While we haven't hit the ground, fall
+    if (rect.top < initial_position.y)
+    {
+        if (descent_velocity < MAX_FALL_VELOCITY)
+        {
+            descent_velocity += ACCELERATION;
+        }
+
+        rect.top += descent_velocity;
+    }
+    else
+    {
+        rect.top = initial_position.y;
+    }
+}
+
+void Hand::grab()
+{
+    if (!grabbing && !recovering_from_grab)
+    {
+        grabbing = true;
+    }
+}

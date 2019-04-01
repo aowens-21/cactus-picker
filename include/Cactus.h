@@ -20,6 +20,8 @@ public:
     Cactus(float x, float y);
 
     void draw(sf::RenderWindow& window);
+
+    sf::FloatRect get_rect() const { return rect; }
 };
 
 #endif //CACTUS_PICKER_CACTUS_H

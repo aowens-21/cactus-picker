@@ -19,12 +19,23 @@ void Game::run_main_loop(const GameState &state)
         {
             is_running = false;
         }
+        else if (current_event.type == sf::Event::KeyPressed)
+        {
+            if (current_event.key.code == sf::Keyboard::W)
+            {
+                left_hand.grab();
+            }
+            else if (current_event.key.code == sf::Keyboard::O)
+            {
+                right_hand.grab();
+            }
+        }
     }
 
     window.clear();
 
-    right_hand.update();
-    left_hand.update();
+    right_hand.update(cactus.get_rect());
+    left_hand.update(cactus.get_rect());
 
     left_hand.draw(window);
     right_hand.draw(window);
