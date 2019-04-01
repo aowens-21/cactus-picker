@@ -9,17 +9,11 @@ void LeftHand::update()
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
     {
-        rect.top -= vertical_velocity;
+        process_ascent();
     }
     else
     {
-        if (rect.top < initial_position.y)
-        {
-            rect.top += GRAVITY;
-        } else
-        {
-            rect.top = initial_position.y;
-        }
+        process_descent();
     }
 
     sprite.setPosition(rect.left, rect.top);
