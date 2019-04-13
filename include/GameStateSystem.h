@@ -6,7 +6,7 @@
 #define CACTUS_PICKER_GAMESTATESYSTEM_H
 
 // Each one controls a different main game loop
-enum class GameState { MainMenu, Settings, Playing, GameWon, GameLost };
+enum class GameState { Playing, Won, Lost };
 
 class GameStateSystem
 {
@@ -14,7 +14,7 @@ private:
     GameState current_state;
 public:
     // Initialize to some beginning state
-    GameStateSystem(): current_state{GameState::MainMenu} {};
+    GameStateSystem(): current_state{GameState::Playing} {};
 
     // Get the state for use by Game object
     GameState get_state() const noexcept { return current_state; }

@@ -56,8 +56,8 @@ public:
     // Tells main if the game is still running
     bool is_game_running() const noexcept { return is_running; }
 
-    // Runs main loop based on the game state
-    void run_main_loop(const GameState& state);
+    // Runs main loop based on the game state system
+    void run_main_loop(GameStateSystem& state_system);
 };
 
 #endif //CACTUS_PICKER_GAME_H

@@ -6,6 +6,18 @@
 #include "../include/RightHand.h"
 #include "../include/Cactus.h"
 
+RightHand::RightHand(float x, float y): Hand(x, y, "../images/right_hand.png")
+{
+    // Set up hitbox coordinates
+    update_hitbox();
+}
+
+void RightHand::update_hitbox()
+{
+    hitbox.left = rect.left;
+    hitbox.top = rect.top + 13;
+}
+
 void RightHand::process_grab_movement(const sf::FloatRect& cactus_rect)
 {
     if (grabbing)
@@ -42,6 +54,7 @@ void RightHand::update(Cactus &cactus)
     }
 
     process_grab_movement(cactus.get_rect());
+    update_hitbox();
     cactus.handle_spike_collisions(this);
 
     sprite.setPosition(rect.left, rect.top);

@@ -13,8 +13,10 @@ class RightHand : public Hand
 {
 private:
     void process_grab_movement(const sf::FloatRect& cactus_rect) override;
+
+    void update_hitbox();
 public:
-    RightHand(float x, float y): Hand(x, y, "../images/right_hand.png") {};
+    RightHand(float x, float y);
 
     void update(Cactus &cactus);
 };

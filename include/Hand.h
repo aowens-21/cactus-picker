@@ -10,6 +10,9 @@
 #include <string>
 #include <SFML/Graphics/RenderWindow.hpp>
 
+constexpr const int HITBOX_WIDTH = 47;
+constexpr const int HITBOX_HEIGHT = 43;
+
 class Hand
 {
 protected:
@@ -33,6 +36,7 @@ protected:
 
     // Rect for collision and physics
     sf::FloatRect rect;
+    sf::FloatRect hitbox;
 
     // Keeping track of initial x and y position
     sf::Vector2f initial_position;
@@ -59,6 +63,8 @@ public:
     void grab();
 
     sf::FloatRect get_rect() const { return rect; }
+
+    sf::FloatRect get_hitbox_rect() const { return hitbox; }
 
     virtual ~Hand()= default;
 };
