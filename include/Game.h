@@ -7,6 +7,8 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Text.hpp>
 #include "GameStateSystem.h"
 #include "RightHand.h"
 #include "Cactus.h"
@@ -17,13 +19,15 @@ constexpr const float INIT_LEFT_HAND_X = 50;
 constexpr const float INIT_RIGHT_HAND_X = 880;
 constexpr const float INIT_CACTUS_X = 380;
 constexpr const float INIT_CACTUS_Y = 70;
+constexpr const int WINDOW_WIDTH = 1024;
+constexpr const int WINDOW_HEIGHT = 800;
 
 // Singleton to represent the game as a whole, managing the actors and game state
 class Game
 {
 private:
     // Game will have control over the window
-    sf::RenderWindow window {sf::VideoMode(1024, 800), "Cactus Picker"};
+    sf::RenderWindow window {sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cactus Picker"};
 
     // For event polling
     sf::Event current_event;
@@ -35,6 +39,17 @@ private:
     RightHand right_hand = RightHand(INIT_RIGHT_HAND_X, INIT_HAND_Y);
     LeftHand left_hand = LeftHand(INIT_LEFT_HAND_X, INIT_HAND_Y);
     Cactus cactus = Cactus(INIT_CACTUS_X, INIT_CACTUS_Y);
+
+    // Clock for the timer
+    sf::Clock clock;
+    sf::Font game_font;
+
+    // Time as a string
+    sf::Text time_display;
+
+    void update_time();
+
+    void init_time_display();
 public:
     Game();
 
