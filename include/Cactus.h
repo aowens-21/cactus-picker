@@ -33,7 +33,7 @@ public:
 
     sf::FloatRect get_rect() const { return rect; }
 
-    void handle_spike_collisions(Hand* hand);
+    bool handle_spike_collisions(Hand* hand);
 
     void update();
 

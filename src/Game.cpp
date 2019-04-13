@@ -49,8 +49,8 @@ void Game::run_main_loop(GameStateSystem &state_system)
         cactus.update();
     }
 
-    right_hand.update(cactus);
-    left_hand.update(cactus);
+    right_hand.update(cactus, state_system);
+    left_hand.update(cactus, state_system);
 
     left_hand.draw(window);
     right_hand.draw(window);

@@ -7,6 +7,7 @@
 
 #include "Hand.h"
 #include "Cactus.h"
+#include "GameStateSystem.h"
 
 class LeftHand : public Hand
 {
@@ -18,7 +19,7 @@ public:
     LeftHand(float x, float y);
 
     // Handles movement logic
-    void update(Cactus &cactus);
+    void update(Cactus &cactus, GameStateSystem& state_system);
 };
 
 #endif //CACTUS_PICKER_LEFTHAND_H

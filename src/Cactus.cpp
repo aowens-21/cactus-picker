@@ -46,7 +46,7 @@ void Cactus::draw(sf::RenderWindow &window)
     }
 }
 
-void Cactus::handle_spike_collisions(Hand *hand)
+bool Cactus::handle_spike_collisions(Hand *hand)
 {
     sf::FloatRect hand_rect = hand->get_rect();
     sf::FloatRect hand_hitbox_rect = hand->get_hitbox_rect();
@@ -57,7 +57,13 @@ void Cactus::handle_spike_collisions(Hand *hand)
         {
             spike.set_grabbed();
         }
+        else if (hand_rect.intersects(spike.get_rect()))
+        {
+            return true;
+        }
     }
+
+    return false;
 }
 
 void Cactus::update()

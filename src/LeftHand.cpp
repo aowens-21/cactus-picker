@@ -42,7 +42,7 @@ void LeftHand::process_grab_movement(const sf::FloatRect &cactus_rect)
     }
 }
 
-void LeftHand::update(Cactus &cactus)
+void LeftHand::update(Cactus &cactus, GameStateSystem& state_system)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
     {
@@ -55,7 +55,12 @@ void LeftHand::update(Cactus &cactus)
 
     process_grab_movement(cactus.get_rect());
     update_hitbox();
-    cactus.handle_spike_collisions(this);
+    auto poked_by_spike = cactus.handle_spike_collisions(this);
+
+    if (poked_by_spike)
+    {
+        state_system.change_state(GameState::Lost);
+    }
 
     sprite.setPosition(rect.left, rect.top);
 }

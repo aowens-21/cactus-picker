@@ -7,6 +7,7 @@
 
 #include "Hand.h"
 #include "Cactus.h"
+#include "GameStateSystem.h"
 #include <SFML/Graphics/Sprite.hpp>
 
 class RightHand : public Hand
@@ -18,7 +19,7 @@ private:
 public:
     RightHand(float x, float y);
 
-    void update(Cactus &cactus);
+    void update(Cactus &cactus, GameStateSystem& state_system);
 };
 
 #endif //CACTUS_PICKER_RIGHTHAND_H
