@@ -34,7 +34,10 @@ void Game::run_main_loop(const GameState &state)
         }
     }
 
-    update_time();
+    if (cactus.get_remaining_spike_count() > 0)
+    {
+        update_time();
+    }
 
     window.clear();
 

@@ -36,6 +36,8 @@ public:
     void handle_spike_collisions(Hand* hand);
 
     void update();
+
+    size_t get_remaining_spike_count() const { return spikes.size(); }
 };
 
 #endif //CACTUS_PICKER_CACTUS_H
