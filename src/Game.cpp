@@ -13,7 +13,7 @@ Game::Game()
 }
 
 // Runs main loop based on a given state
-void Game::run_main_loop(const GameState &state)
+void Game::run_main_loop(GameStateSystem &state_system)
 {
     while (window.pollEvent(current_event))
     {
@@ -34,16 +34,23 @@ void Game::run_main_loop(const GameState &state)
         }
     }
 
-    if (cactus.get_remaining_spike_count() > 0)
-    {
-        update_time();
-    }
-
     window.clear();
 
-    right_hand.update(cactus);
-    left_hand.update(cactus);
-    cactus.update();
+    if (state_system.get_state() == GameState::Playing)
+    {
+        if (cactus.get_remaining_spike_count() > 0)
+        {
+            update_time();
+        }
+        else
+        {
+            state_system.change_state(GameState::Won);
+        }
+        cactus.update();
+    }
+
+    right_hand.update(cactus, state_system);
+    left_hand.update(cactus, state_system);
 
     left_hand.draw(window);
     right_hand.draw(window);

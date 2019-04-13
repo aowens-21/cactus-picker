@@ -14,7 +14,7 @@ int main()
     // Start the game loop
     while (game.is_game_running())
     {
-        game.run_main_loop(state_system.get_state());
+        game.run_main_loop(state_system);
     }
 
     return EXIT_SUCCESS;
