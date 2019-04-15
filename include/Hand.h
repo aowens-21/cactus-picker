@@ -10,8 +10,8 @@
 #include <string>
 #include <SFML/Graphics/RenderWindow.hpp>
 
-constexpr const int HITBOX_WIDTH = 47;
-constexpr const int HITBOX_HEIGHT = 43;
+constexpr const int HITBOX_WIDTH = 43;
+constexpr const int HITBOX_HEIGHT = 28;
 
 class Hand
 {

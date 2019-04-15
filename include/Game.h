@@ -15,10 +15,10 @@
 #include "LeftHand.h"
 
 constexpr const float INIT_HAND_Y = 670;
-constexpr const float INIT_LEFT_HAND_X = 50;
-constexpr const float INIT_RIGHT_HAND_X = 880;
+constexpr const float INIT_LEFT_HAND_X = 0;
+constexpr const float INIT_RIGHT_HAND_X = 900;
 constexpr const float INIT_CACTUS_X = 380;
-constexpr const float INIT_CACTUS_Y = 70;
+constexpr const float INIT_CACTUS_Y = 55;
 constexpr const int WINDOW_WIDTH = 1024;
 constexpr const int WINDOW_HEIGHT = 800;
 

@@ -15,7 +15,7 @@ RightHand::RightHand(float x, float y): Hand(x, y, "../images/right_hand.png")
 void RightHand::update_hitbox()
 {
     hitbox.left = rect.left;
-    hitbox.top = rect.top + 13;
+    hitbox.top = rect.top + 12;
 }
 
 void RightHand::process_grab_movement(const sf::FloatRect& cactus_rect)

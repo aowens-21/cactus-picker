@@ -15,7 +15,7 @@ void LeftHand::update_hitbox()
 {
     // Set up hitbox coordinates
     hitbox.left = (rect.left + rect.width) - HITBOX_WIDTH;
-    hitbox.top = rect.top + 13;
+    hitbox.top = rect.top + 12;
 }
 
 void LeftHand::process_grab_movement(const sf::FloatRect &cactus_rect)
