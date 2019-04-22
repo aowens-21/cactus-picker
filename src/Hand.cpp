@@ -15,7 +15,7 @@ Hand::Hand(float x, float y, const std::string &texture_path)
     rect.left = x;
     rect.top = y;
     rect.width = texture.getSize().x;
-    rect.height = texture.getSize().y;
+    rect.height = texture.getSize().y - static_cast<float>(texture.getSize().y)/2 + RECT_HEIGHT_OFFSET;
 
     // Set up the hitbox rect size
     hitbox.width = HITBOX_WIDTH;

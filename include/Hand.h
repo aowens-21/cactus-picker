@@ -12,6 +12,7 @@
 
 constexpr const int HITBOX_WIDTH = 43;
 constexpr const int HITBOX_HEIGHT = 28;
+constexpr const int RECT_HEIGHT_OFFSET = 10;
 
 class Hand
 {

@@ -56,6 +56,7 @@ bool Cactus::handle_spike_collisions(Hand *hand)
         if (hand_hitbox_rect.intersects(spike.get_rect()))
         {
             spike.set_grabbed();
+            return false;
         }
         else if (hand_rect.intersects(spike.get_rect()))
         {
