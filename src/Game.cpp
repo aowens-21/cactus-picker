@@ -10,6 +10,11 @@ Game::Game()
     window.setFramerateLimit(60);
     game_font.loadFromFile("../images/roboto.ttf");
     init_time_display();
+
+    // Set up bg
+    bg_texture.loadFromFile("../images/bg.png");
+    bg_sprite.setTexture(bg_texture);
+    bg_sprite.setPosition(0, 0);
 }
 
 // Runs main loop based on a given state
@@ -52,6 +57,7 @@ void Game::run_main_loop(GameStateSystem &state_system)
     right_hand.update(cactus, state_system);
     left_hand.update(cactus, state_system);
 
+    window.draw(bg_sprite);
     left_hand.draw(window);
     right_hand.draw(window);
     cactus.draw(window);

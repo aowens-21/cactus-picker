@@ -28,12 +28,12 @@ Cactus::Cactus(float x, float y)
 
 void Cactus::setup_spikes()
 {
-    spikes.emplace_back(Spike(rect.left - 40, 300, spike_texture));
-    spikes.emplace_back(Spike(rect.left - 40, 400, spike_texture));
-    spikes.emplace_back(Spike(rect.left - 40, 600, spike_texture));
-    spikes.emplace_back(Spike(rect.left + rect.width - 10, 200, spike_texture));
-    spikes.emplace_back(Spike(rect.left + rect.width - 10, 500, spike_texture));
-    spikes.emplace_back(Spike(rect.left + rect.width - 10, 700, spike_texture));
+    spikes.emplace_back(Spike(rect.left - 20, 300, spike_texture));
+    spikes.emplace_back(Spike(rect.left - 20, 400, spike_texture));
+    spikes.emplace_back(Spike(rect.left - 22, 600, spike_texture));
+    spikes.emplace_back(Spike(rect.left + rect.width + 20, 200, spike_texture, true));
+    spikes.emplace_back(Spike(rect.left + rect.width + 25, 500, spike_texture, true));
+    spikes.emplace_back(Spike(rect.left + rect.width + 28, 700, spike_texture, true));
 
 }
 

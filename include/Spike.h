@@ -16,7 +16,7 @@ private:
 
     bool grabbed = false;
 public:
-    Spike(float x, float y, const sf::Texture& texture);
+    Spike(float x, float y, const sf::Texture& texture, bool flipped=false);
 
     void draw(sf::RenderWindow& window);
 

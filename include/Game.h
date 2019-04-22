@@ -29,6 +29,10 @@ private:
     // Game will have control over the window
     sf::RenderWindow window {sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cactus Picker"};
 
+    // Game's background image
+    sf::Texture bg_texture;
+    sf::Sprite bg_sprite;
+
     // For event polling
     sf::Event current_event;
 
