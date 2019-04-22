@@ -63,6 +63,17 @@ void Game::run_main_loop(GameStateSystem &state_system)
     cactus.draw(window);
     window.draw(time_display);
 
+    if (state_system.get_state() == GameState::Lost)
+    {
+        retry_menu.update(right_hand, left_hand, state_system);
+        retry_menu.draw(window);
+    }
+
+    if (state_system.get_state() == GameState::Exiting)
+    {
+        is_running = false;
+    }
+
     window.display();
 }
 

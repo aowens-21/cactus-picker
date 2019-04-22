@@ -13,6 +13,7 @@
 #include "RightHand.h"
 #include "Cactus.h"
 #include "LeftHand.h"
+#include "RetryMenu.h"
 
 constexpr const float INIT_HAND_Y = 670;
 constexpr const float INIT_LEFT_HAND_X = 0;
@@ -38,6 +39,9 @@ private:
 
     // Keeping track of if the game is still running
     bool is_running = true;
+
+    // Menu members
+    RetryMenu retry_menu = RetryMenu{};
 
     // All of the main game members
     RightHand right_hand = RightHand(INIT_RIGHT_HAND_X, INIT_HAND_Y);

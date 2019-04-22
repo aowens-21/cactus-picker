@@ -6,7 +6,7 @@
 #define CACTUS_PICKER_GAMESTATESYSTEM_H
 
 // Each one controls a different main game loop
-enum class GameState { Playing, Won, Lost };
+enum class GameState { Playing, Won, Lost, Exiting, Restarting };
 
 class GameStateSystem
 {

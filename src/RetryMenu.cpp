@@ -8,7 +8,7 @@ RetryMenu::RetryMenu()
 {
     menu_texture.loadFromFile("../images/retry_menu_mock.png");
     menu_sprite.setTexture(menu_texture);
-    menu_sprite.setPosition(300, 300);
+    menu_sprite.setPosition(340, 240);
 
     retry_rect.left = menu_sprite.getPosition().x;
     retry_rect.top = menu_sprite.getPosition().y + 122;
@@ -19,5 +19,22 @@ RetryMenu::RetryMenu()
     quit_rect.top = menu_sprite.getPosition().y + 199;
     quit_rect.width = BUTTON_WIDTH;
     quit_rect.height = BUTTON_HEIGHT;
+}
+
+void RetryMenu::draw(sf::RenderWindow& window)
+{
+    window.draw(menu_sprite);
+}
+
+void RetryMenu::update(const RightHand& rh, const LeftHand& lh, GameStateSystem& state_system)
+{
+    if (quit_rect.intersects(rh.get_rect()) || quit_rect.intersects(lh.get_rect()))
+    {
+        state_system.change_state(GameState::Exiting);
+    }
+    else if (retry_rect.intersects(rh.get_rect()) || retry_rect.intersects(lh.get_rect()))
+    {
+        state_system.change_state(GameState::Restarting);
+    }
 }
 
