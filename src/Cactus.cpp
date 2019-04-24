@@ -22,19 +22,25 @@ Cactus::Cactus(float x, float y)
 
     sprite.setPosition(x, y);
 
+    // Set up sounds
+    poked_sound_buffer.loadFromFile("../sounds/poked.wav");
+    plucked_sound_buffer.loadFromFile("../sounds/plucked_spike.wav");
+    poked_sound.setBuffer(poked_sound_buffer);
+    plucked_spike_sound.setBuffer(plucked_sound_buffer);
+
     // Set up the spikes
     setup_spikes();
 }
 
 void Cactus::setup_spikes()
 {
+    spikes.erase(spikes.begin(), spikes.end());
     spikes.emplace_back(Spike(rect.left - 20, 300, spike_texture));
     spikes.emplace_back(Spike(rect.left - 20, 400, spike_texture));
     spikes.emplace_back(Spike(rect.left - 22, 600, spike_texture));
     spikes.emplace_back(Spike(rect.left + rect.width + 20, 200, spike_texture, true));
     spikes.emplace_back(Spike(rect.left + rect.width + 25, 500, spike_texture, true));
     spikes.emplace_back(Spike(rect.left + rect.width + 28, 700, spike_texture, true));
-
 }
 
 void Cactus::draw(sf::RenderWindow &window)
@@ -56,10 +62,12 @@ bool Cactus::handle_spike_collisions(Hand *hand)
         if (hand_hitbox_rect.intersects(spike.get_rect()))
         {
             spike.set_grabbed();
+            plucked_spike_sound.play();
             return false;
         }
         else if (hand_rect.intersects(spike.get_rect()))
         {
+            poked_sound.play();
             return true;
         }
     }

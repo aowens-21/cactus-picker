@@ -2,6 +2,7 @@
 // Created by alex on 4/1/19.
 //
 
+#include <SFML/Graphics/RectangleShape.hpp>
 #include "../include/Spike.h"
 #include "SFML/Graphics/Texture.hpp"
 
@@ -18,6 +19,7 @@ Spike::Spike(float x, float y, const sf::Texture &texture, bool flipped)
 
     if (flipped) {
         sprite.setScale(-1.0f, 1.0f);
+        rect.left = rect.left - rect.width;
     }
 }
 

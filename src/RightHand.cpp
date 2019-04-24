@@ -55,11 +55,15 @@ void RightHand::update(Cactus &cactus, GameStateSystem& state_system)
 
     process_grab_movement(cactus.get_rect());
     update_hitbox();
-    auto poked_by_spike = cactus.handle_spike_collisions(this);
 
-    if (poked_by_spike)
+    if (state_system.get_state() == GameState::Playing)
     {
-        state_system.change_state(GameState::Lost);
+        auto poked_by_spike = cactus.handle_spike_collisions(this);
+        if (poked_by_spike)
+        {
+            state_system.change_state(GameState::Lost);
+            reset();
+        }
     }
 
     sprite.setPosition(rect.left, rect.top);

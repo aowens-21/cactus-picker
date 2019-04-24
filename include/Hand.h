@@ -67,7 +67,7 @@ public:
 
     sf::FloatRect get_hitbox_rect() const { return hitbox; }
 
-    void reset_position();
+    void reset();
 
     bool is_recovering_from_grab() const { return recovering_from_grab; }
 

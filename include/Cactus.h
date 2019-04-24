@@ -8,6 +8,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/Audio/Sound.hpp>
 #include "Spike.h"
 #include "Hand.h"
 
@@ -18,6 +20,12 @@ private:
 
     sf::Texture cactus_texture;
     sf::Sprite sprite;
+
+    sf::SoundBuffer poked_sound_buffer;
+    sf::SoundBuffer plucked_sound_buffer;
+    sf::Sound poked_sound;
+    sf::Sound plucked_spike_sound;
+
 
     sf::FloatRect rect;
 

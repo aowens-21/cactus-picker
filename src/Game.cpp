@@ -95,8 +95,8 @@ void Game::init_time_display()
 
 void Game::start_game()
 {
-    right_hand.reset_position();
-    left_hand.reset_position();
+    right_hand.reset();
+    left_hand.reset();
     cactus.setup_spikes();
     clock.restart();
 }

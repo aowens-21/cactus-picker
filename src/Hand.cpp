@@ -3,6 +3,7 @@
 //
 
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 #include "../include/Hand.h"
 
 Hand::Hand(float x, float y, const std::string &texture_path)
@@ -77,9 +78,11 @@ void Hand::grab()
     }
 }
 
-void Hand::reset_position()
+void Hand::reset()
 {
     rect.left = initial_position.x;
     rect.top = initial_position.y;
     sprite.setPosition(rect.left, rect.top);
+    grabbing = false;
+    recovering_from_grab = false;
 }
