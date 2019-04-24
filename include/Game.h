@@ -66,6 +66,8 @@ public:
 
     // Runs main loop based on the game state system
     void run_main_loop(GameStateSystem& state_system);
+
+    void start_game();
 };
 
 #endif //CACTUS_PICKER_GAME_H

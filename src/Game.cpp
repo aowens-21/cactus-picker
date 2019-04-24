@@ -68,8 +68,12 @@ void Game::run_main_loop(GameStateSystem &state_system)
         retry_menu.update(right_hand, left_hand, state_system);
         retry_menu.draw(window);
     }
-
-    if (state_system.get_state() == GameState::Exiting)
+    else if (state_system.get_state() == GameState::Restarting)
+    {
+        start_game();
+        state_system.change_state(GameState::Playing);
+    }
+    else if (state_system.get_state() == GameState::Exiting)
     {
         is_running = false;
     }
@@ -87,4 +91,12 @@ void Game::init_time_display()
 {
     time_display.setFont(game_font);
     time_display.setPosition(WINDOW_WIDTH/2 - 20, 20);
+}
+
+void Game::start_game()
+{
+    right_hand.reset_position();
+    left_hand.reset_position();
+    cactus.setup_spikes();
+    clock.restart();
 }

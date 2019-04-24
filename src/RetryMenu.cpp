@@ -28,11 +28,17 @@ void RetryMenu::draw(sf::RenderWindow& window)
 
 void RetryMenu::update(const RightHand& rh, const LeftHand& lh, GameStateSystem& state_system)
 {
-    if (quit_rect.intersects(rh.get_rect()) || quit_rect.intersects(lh.get_rect()))
+    bool exit = (!rh.is_recovering_from_grab() && quit_rect.intersects(rh.get_rect()))
+            || (!lh.is_recovering_from_grab() && quit_rect.intersects(lh.get_rect()));
+
+    bool restart = (!rh.is_recovering_from_grab() && retry_rect.intersects(rh.get_rect()))
+                 || (!lh.is_recovering_from_grab() && retry_rect.intersects(lh.get_rect()));
+
+    if (exit)
     {
         state_system.change_state(GameState::Exiting);
     }
-    else if (retry_rect.intersects(rh.get_rect()) || retry_rect.intersects(lh.get_rect()))
+    else if (restart)
     {
         state_system.change_state(GameState::Restarting);
     }

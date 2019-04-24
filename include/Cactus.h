@@ -23,9 +23,6 @@ private:
 
     // Container of spikes
     std::vector<Spike> spikes;
-
-    // Sets up all the spikes on the cactus
-    void setup_spikes();
 public:
     Cactus(float x, float y);
 
@@ -38,6 +35,9 @@ public:
     void update();
 
     size_t get_remaining_spike_count() const { return spikes.size(); }
+
+    // Sets up all the spikes on the cactus
+    void setup_spikes();
 };
 
 #endif //CACTUS_PICKER_CACTUS_H
