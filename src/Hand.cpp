@@ -76,3 +76,10 @@ void Hand::grab()
         grabbing = true;
     }
 }
+
+void Hand::reset_position()
+{
+    rect.left = initial_position.x;
+    rect.top = initial_position.y;
+    sprite.setPosition(rect.left, rect.top);
+}
