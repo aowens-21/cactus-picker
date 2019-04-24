@@ -12,6 +12,7 @@
 #include <SFML/Audio/Sound.hpp>
 #include "Spike.h"
 #include "Hand.h"
+#include "EffectSystem.h"
 
 class Cactus
 {
@@ -26,6 +27,7 @@ private:
     sf::Sound poked_sound;
     sf::Sound plucked_spike_sound;
 
+    EffectSystem effect_system = EffectSystem();
 
     sf::FloatRect rect;
 
