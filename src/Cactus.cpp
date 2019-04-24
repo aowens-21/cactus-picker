@@ -50,6 +50,7 @@ void Cactus::draw(sf::RenderWindow &window)
     {
         spike.draw(window);
     }
+    effect_system.draw(window);
 }
 
 bool Cactus::handle_spike_collisions(Hand *hand)
@@ -59,15 +60,24 @@ bool Cactus::handle_spike_collisions(Hand *hand)
 
     for (auto& spike : spikes)
     {
-        if (hand_hitbox_rect.intersects(spike.get_rect()))
+        auto spike_rect = spike.get_rect();
+        if (hand_hitbox_rect.intersects(spike_rect))
         {
             spike.set_grabbed();
             plucked_spike_sound.play();
+            effect_system.play_pluck_effect(spike_rect.left, spike_rect.top);
+
+            // Hacky but we need to get rid of effects if game state changes
+            if (spikes.size() == 1) {
+                effect_system.reset_effects();
+            }
+
             return false;
         }
-        else if (hand_rect.intersects(spike.get_rect()))
+        else if (hand_rect.intersects(spike_rect))
         {
             poked_sound.play();
+            effect_system.reset_effects();
             return true;
         }
     }
@@ -77,6 +87,7 @@ bool Cactus::handle_spike_collisions(Hand *hand)
 
 void Cactus::update()
 {
+    effect_system.update();
     spikes.erase(std::remove_if(spikes.begin(), spikes.end(), [](Spike& spike) { return spike.is_grabbed(); })
             , spikes.end());
 }
