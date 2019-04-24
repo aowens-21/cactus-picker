@@ -8,13 +8,17 @@
 Game::Game()
 {
     window.setFramerateLimit(60);
-    game_font.loadFromFile("../images/roboto.ttf");
-    init_time_display();
+    game_font.loadFromFile("../images/manaspc.ttf");
 
     // Set up bg
     bg_texture.loadFromFile("../images/bg.png");
     bg_sprite.setTexture(bg_texture);
     bg_sprite.setPosition(0, 0);
+
+    timer_bg_texture.loadFromFile("../images/timer_bg.png");
+    timer_bg_sprite.setTexture(timer_bg_texture);
+    timer_bg_sprite.setPosition(INIT_CACTUS_X + 50, INIT_CACTUS_Y - 100);
+    init_time_display();
 }
 
 // Runs main loop based on a given state
@@ -61,6 +65,7 @@ void Game::run_main_loop(GameStateSystem &state_system)
     left_hand.draw(window);
     right_hand.draw(window);
     cactus.draw(window);
+    window.draw(timer_bg_sprite);
     window.draw(time_display);
 
     if (state_system.get_state() == GameState::Lost)
@@ -72,6 +77,7 @@ void Game::run_main_loop(GameStateSystem &state_system)
     {
         start_game();
         state_system.change_state(GameState::Playing);
+        clock.restart();
     }
     else if (state_system.get_state() == GameState::Exiting)
     {
@@ -89,8 +95,9 @@ void Game::update_time()
 
 void Game::init_time_display()
 {
+    auto timer_bg_pos = timer_bg_sprite.getPosition();
     time_display.setFont(game_font);
-    time_display.setPosition(WINDOW_WIDTH/2 - 20, 20);
+    time_display.setPosition(timer_bg_pos.x + 25, timer_bg_pos.y + 48);
 }
 
 void Game::start_game()
@@ -98,5 +105,4 @@ void Game::start_game()
     right_hand.reset();
     left_hand.reset();
     cactus.setup_spikes();
-    clock.restart();
 }

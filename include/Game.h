@@ -54,6 +54,8 @@ private:
 
     // Time as a string
     sf::Text time_display;
+    sf::Texture timer_bg_texture;
+    sf::Sprite timer_bg_sprite;
 
     void update_time();
 
