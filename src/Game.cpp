@@ -40,6 +40,10 @@ void Game::run_main_loop(GameStateSystem &state_system)
             {
                 right_hand.grab();
             }
+            else if (current_event.key.code == sf::Keyboard::R)
+            {
+                state_system.change_state(GameState::Restarting);
+            }
         }
     }
 
