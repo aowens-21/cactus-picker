@@ -12,8 +12,8 @@
 #include "LeftHand.h"
 #include "GameStateSystem.h"
 
-const constexpr float BUTTON_WIDTH = 19.0;
-const constexpr float BUTTON_HEIGHT = 27.0;
+const constexpr float BUTTON_WIDTH = 26.0;
+const constexpr float BUTTON_HEIGHT = 45.0;
 
 class RetryMenu {
 private:
