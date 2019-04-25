@@ -8,7 +8,7 @@ RetryMenu::RetryMenu()
 {
     menu_texture.loadFromFile("../images/retry_menu.png");
     menu_sprite.setTexture(menu_texture);
-    menu_sprite.setPosition(250, 200);
+    menu_sprite.setPosition(245, 200);
 
     retry_rect.left = menu_sprite.getPosition().x;
     retry_rect.top = menu_sprite.getPosition().y + 194;
