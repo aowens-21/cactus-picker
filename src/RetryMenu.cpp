@@ -1,7 +1,3 @@
-//
-// Created by aowens on 4/22/19.
-//
-
 #include "../include/RetryMenu.h"
 
 RetryMenu::RetryMenu()
@@ -15,10 +11,10 @@ RetryMenu::RetryMenu()
     retry_rect.width = BUTTON_WIDTH;
     retry_rect.height = BUTTON_HEIGHT;
 
-    quit_rect.left = menu_sprite.getPosition().x + menu_sprite.getTexture()->getSize().x - BUTTON_WIDTH;
-    quit_rect.top = menu_sprite.getPosition().y + 315;
-    quit_rect.width = BUTTON_WIDTH;
-    quit_rect.height = BUTTON_HEIGHT;
+    menu_rect.left = menu_sprite.getPosition().x + menu_sprite.getTexture()->getSize().x - BUTTON_WIDTH;
+    menu_rect.top = menu_sprite.getPosition().y + 315;
+    menu_rect.width = BUTTON_WIDTH;
+    menu_rect.height = BUTTON_HEIGHT;
 }
 
 void RetryMenu::draw(sf::RenderWindow& window)
@@ -28,13 +24,13 @@ void RetryMenu::draw(sf::RenderWindow& window)
 
 void RetryMenu::update(const RightHand& rh, const LeftHand& lh, GameStateSystem& state_system)
 {
-    bool exit = quit_rect.intersects(rh.get_rect()) || quit_rect.intersects(lh.get_rect());
+    bool menu = menu_rect.intersects(rh.get_rect()) || menu_rect.intersects(lh.get_rect());
 
     bool restart = retry_rect.intersects(rh.get_rect()) || retry_rect.intersects(lh.get_rect());
 
-    if (exit)
+    if (menu)
     {
-        state_system.change_state(GameState::Exiting);
+        state_system.change_state(GameState::MainMenu);
     }
     else if (restart)
     {

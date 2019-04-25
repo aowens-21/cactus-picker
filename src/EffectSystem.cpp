@@ -1,4 +1,4 @@
-#include "EffectSystem.h"
+#include "../include/EffectSystem.h"
 
 EffectSystem::EffectSystem()
 {

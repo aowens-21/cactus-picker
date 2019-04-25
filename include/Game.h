@@ -1,7 +1,3 @@
-//
-// Created by alex on 3/30/19.
-//
-
 #ifndef CACTUS_PICKER_GAME_H
 #define CACTUS_PICKER_GAME_H
 
@@ -14,6 +10,7 @@
 #include "Cactus.h"
 #include "LeftHand.h"
 #include "RetryMenu.h"
+#include "MainMenu.h"
 
 constexpr const float INIT_HAND_Y = 670;
 constexpr const float INIT_LEFT_HAND_X = 0;
@@ -41,7 +38,8 @@ private:
     bool is_running = true;
 
     // Menu members
-    RetryMenu retry_menu = RetryMenu{};
+    RetryMenu retry_menu = RetryMenu();
+    MainMenu main_menu = MainMenu();
 
     // All of the main game members
     RightHand right_hand = RightHand(INIT_RIGHT_HAND_X, INIT_HAND_Y);

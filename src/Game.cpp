@@ -24,13 +24,15 @@ Game::Game()
 // Runs main loop based on a given state
 void Game::run_main_loop(GameStateSystem &state_system)
 {
+    GameState state = state_system.get_state();
+
     while (window.pollEvent(current_event))
     {
         if (current_event.type == sf::Event::Closed)
         {
             is_running = false;
         }
-        else if (current_event.type == sf::Event::KeyPressed)
+        else if (current_event.type == sf::Event::KeyPressed && state != GameState::MainMenu)
         {
             if (current_event.key.code == sf::Keyboard::W)
             {
@@ -45,11 +47,16 @@ void Game::run_main_loop(GameStateSystem &state_system)
                 state_system.change_state(GameState::Restarting);
             }
         }
+        else if (current_event.type == sf::Event::MouseButtonPressed && state == GameState::MainMenu) {
+            if (current_event.mouseButton.button == sf::Mouse::Left) {
+                main_menu.handle_click(state_system, window);
+            }
+        }
     }
 
     window.clear();
 
-    if (state_system.get_state() == GameState::Playing)
+    if (state == GameState::Playing)
     {
         if (cactus.get_remaining_spike_count() > 0)
         {
@@ -62,30 +69,37 @@ void Game::run_main_loop(GameStateSystem &state_system)
         cactus.update();
     }
 
-    right_hand.update(cactus, state_system);
-    left_hand.update(cactus, state_system);
+    if (state != GameState::MainMenu)
+    {
+        right_hand.update(cactus, state_system);
+        left_hand.update(cactus, state_system);
 
-    window.draw(bg_sprite);
-    left_hand.draw(window);
-    right_hand.draw(window);
-    cactus.draw(window);
-    window.draw(timer_bg_sprite);
-    window.draw(time_display);
+        window.draw(bg_sprite);
+        left_hand.draw(window);
+        right_hand.draw(window);
+        cactus.draw(window);
+        window.draw(timer_bg_sprite);
+        window.draw(time_display);
+    }
 
-    if (state_system.get_state() == GameState::Lost)
+    if (state == GameState::Lost)
     {
         retry_menu.update(right_hand, left_hand, state_system);
         retry_menu.draw(window);
     }
-    else if (state_system.get_state() == GameState::Restarting)
+    else if (state == GameState::Restarting)
     {
         start_game();
         state_system.change_state(GameState::Playing);
         clock.restart();
     }
-    else if (state_system.get_state() == GameState::Exiting)
+    else if (state == GameState::Exiting)
     {
         is_running = false;
+    }
+    else if (state == GameState::MainMenu)
+    {
+        main_menu.draw(window);
     }
 
     window.display();

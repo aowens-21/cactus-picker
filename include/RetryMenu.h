@@ -21,7 +21,7 @@ private:
     sf::Sprite menu_sprite;
 
     sf::FloatRect retry_rect;
-    sf::FloatRect quit_rect;
+    sf::FloatRect menu_rect;
 public:
     RetryMenu();
 
