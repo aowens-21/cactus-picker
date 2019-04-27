@@ -68,6 +68,18 @@ private:
     void update_time();
 
     void init_time_display();
+
+    void run_playing(GameStateSystem &state_system);
+
+    void run_main_menu(GameStateSystem &state_system);
+
+    void run_restarting(GameStateSystem &state_system);
+
+    void run_exiting();
+
+    void run_lost(GameStateSystem &state_system);
+
+    void run_won(GameStateSystem &state_system);
 public:
     Game();
 
@@ -78,6 +90,10 @@ public:
     void run_main_loop(GameStateSystem& state_system);
 
     void start_game();
+
+    void render_gameplay_entities();
+
+    void handle_gameplay_events(GameStateSystem &state_system);
 };
 
 #endif //CACTUS_PICKER_GAME_H

@@ -43,87 +43,147 @@ void Game::run_main_loop(GameStateSystem &state_system)
 {
     GameState state = state_system.get_state();
 
+    window.clear();
+
+    switch (state) {
+        case GameState::MainMenu: {
+            run_main_menu(state_system);
+            break;
+        }
+
+        case GameState::Playing: {
+            run_playing(state_system);
+            break;
+        }
+
+        case GameState::Won: {
+            run_won(state_system);
+            break;
+        }
+
+        case GameState::Lost: {
+            run_lost(state_system);
+            break;
+        }
+
+        case GameState::Restarting: {
+            run_restarting(state_system);
+            break;
+        }
+
+        case GameState::Exiting: {
+            run_exiting();
+            break;
+        }
+    }
+
+    window.display();
+}
+
+void Game::run_main_menu(GameStateSystem &state_system)
+{
     while (window.pollEvent(current_event))
     {
-        if (current_event.type == sf::Event::Closed)
-        {
+        if (current_event.type == sf::Event::Closed) {
             is_running = false;
-        }
-        else if (current_event.type == sf::Event::KeyPressed && state != GameState::MainMenu)
-        {
-            if (current_event.key.code == sf::Keyboard::W)
-            {
-                left_hand.grab();
-            }
-            else if (current_event.key.code == sf::Keyboard::O)
-            {
-                right_hand.grab();
-            }
-            else if (current_event.key.code == sf::Keyboard::R)
-            {
-                state_system.change_state(GameState::Restarting);
-            }
-        }
-        else if (current_event.type == sf::Event::MouseButtonPressed && state == GameState::MainMenu) {
+        } else if (current_event.type == sf::Event::MouseButtonPressed) {
             if (current_event.mouseButton.button == sf::Mouse::Left) {
                 main_menu.handle_click(state_system, window);
             }
         }
     }
 
-    window.clear();
+    main_menu.draw(window);
+}
 
-    if (state == GameState::Playing)
+void Game::run_playing(GameStateSystem &state_system)
+{
+    handle_gameplay_events(state_system);
+
+    if (cactus.get_remaining_spike_count() > 0)
     {
-        if (cactus.get_remaining_spike_count() > 0)
+        update_time();
+    }
+    else
+    {
+        state_system.change_state(GameState::Won);
+    }
+    cactus.update();
+
+    right_hand.update(cactus, state_system);
+    left_hand.update(cactus, state_system);
+
+    render_gameplay_entities();
+}
+
+void Game::run_restarting(GameStateSystem &state_system)
+{
+    start_game();
+    state_system.change_state(GameState::Playing);
+    clock.restart();
+
+    render_gameplay_entities();
+}
+
+void Game::run_exiting()
+{
+    is_running = false;
+}
+
+void Game::run_lost(GameStateSystem &state_system)
+{
+    handle_gameplay_events(state_system);
+
+    right_hand.update(cactus, state_system);
+    left_hand.update(cactus, state_system);
+
+    render_gameplay_entities();
+
+    retry_menu.update(right_hand, left_hand, state_system);
+    retry_menu.draw(window);
+}
+
+void Game::run_won(GameStateSystem &state_system)
+{
+    run_lost(state_system);
+}
+
+void Game::handle_gameplay_events(GameStateSystem &state_system)
+{
+    while (window.pollEvent(current_event))
+    {
+        if (current_event.type == sf::Event::Closed)
         {
-            update_time();
+            is_running = false;
         }
-        else
+        else if (current_event.type == sf::Event::KeyPressed)
         {
-            state_system.change_state(GameState::Won);
+            if (current_event.key.code == sf::Keyboard::W)
+            {
+                left_hand.grab();
+            } else if (current_event.key.code == sf::Keyboard::O)
+            {
+                right_hand.grab();
+            } else if (current_event.key.code == sf::Keyboard::R)
+            {
+                state_system.change_state(GameState::Restarting);
+            }
         }
-        cactus.update();
     }
+}
 
-    if (state != GameState::MainMenu)
-    {
-        right_hand.update(cactus, state_system);
-        left_hand.update(cactus, state_system);
-
-        window.draw(bg_sprite);
-        left_hand.draw(window);
-        right_hand.draw(window);
-        cactus.draw(window);
-        window.draw(q_sprite);
-        window.draw(w_sprite);
-        window.draw(p_sprite);
-        window.draw(o_sprite);
-        window.draw(timer_bg_sprite);
-        window.draw(time_display);
-    }
-
-    if (state == GameState::Lost)
-    {
-        retry_menu.update(right_hand, left_hand, state_system);
-        retry_menu.draw(window);
-    }
-    else if (state == GameState::Restarting)
-    {
-        start_game();
-        state_system.change_state(GameState::Playing);
-        clock.restart();
-    }
-    else if (state == GameState::Exiting)
-    {
-        is_running = false;
-    }
-    else if (state == GameState::MainMenu)
-    {
-        main_menu.draw(window);
-    }
-
-    window.display();
+void Game::render_gameplay_entities()
+{
+    window.draw(bg_sprite);
+    left_hand.draw(window);
+    right_hand.draw(window);
+    cactus.draw(window);
+    window.draw(q_sprite);
+    window.draw(w_sprite);
+    window.draw(p_sprite);
+    window.draw(o_sprite);
+    window.draw(timer_bg_sprite);
+    window.draw(time_display);
 }
 
 void Game::update_time()
