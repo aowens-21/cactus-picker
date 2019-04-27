@@ -10,7 +10,7 @@ private:
     GameState current_state;
 public:
     // Initialize to some beginning state
-    GameStateSystem(): current_state{GameState::Playing} {};
+    GameStateSystem(): current_state{GameState::MainMenu} {};
 
     // Get the state for use by Game object
     GameState get_state() const noexcept { return current_state; }
