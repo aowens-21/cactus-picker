@@ -31,6 +31,16 @@ private:
     sf::Texture bg_texture;
     sf::Sprite bg_sprite;
 
+    // Controls textures
+    sf::Texture q_texture;
+    sf::Sprite q_sprite;
+    sf::Texture w_texture;
+    sf::Sprite w_sprite;
+    sf::Texture p_texture;
+    sf::Sprite p_sprite;
+    sf::Texture o_texture;
+    sf::Sprite o_sprite;
+
     // For event polling
     sf::Event current_event;
 
