@@ -58,15 +58,19 @@ private:
     Cactus cactus = Cactus(INIT_CACTUS_X, INIT_CACTUS_Y);
 
     // Clock for the timer
-    sf::Clock clock;
+    sf::Clock game_clock;
+    sf::Clock countdown_clock;
     sf::Font game_font;
 
     // Time as a string
     sf::Text time_display;
+    sf::Text countdown_display;
     sf::Texture timer_bg_texture;
     sf::Sprite timer_bg_sprite;
 
-    void update_time();
+    void update_time_display();
+
+    void update_countdown_display();
 
     void init_time_display();
 
@@ -90,7 +94,7 @@ public:
     // Runs main loop based on the game state system
     void run_main_loop(GameStateSystem& state_system);
 
-    void start_game();
+    void reset_game();
 
     void render_gameplay_entities();
 

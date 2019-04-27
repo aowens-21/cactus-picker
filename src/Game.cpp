@@ -36,6 +36,13 @@ Game::Game()
     timer_bg_sprite.setTexture(timer_bg_texture);
     timer_bg_sprite.setPosition(INIT_CACTUS_X + 50, INIT_CACTUS_Y - 100);
     init_time_display();
+
+    countdown_display.setFont(game_font);
+    countdown_display.setCharacterSize(256);
+    countdown_display.setPosition(
+            window.getSize().x / 2.0f - countdown_display.getCharacterSize() / 2.0f + 30,
+            window.getSize().y / 2.0f - countdown_display.getCharacterSize() / 2.0f);
+    countdown_display.setFillColor(sf::Color::Black);
 }
 
 // Runs main loop based on a given state
@@ -89,6 +96,9 @@ void Game::run_main_menu(GameStateSystem &state_system)
         } else if (current_event.type == sf::Event::MouseButtonPressed) {
             if (current_event.mouseButton.button == sf::Mouse::Left) {
                 main_menu.handle_click(state_system, window);
+                if (state_system.get_state() == GameState::Restarting) {
+                    countdown_clock.restart();
+                }
             }
         }
     }
@@ -102,7 +112,7 @@ void Game::run_playing(GameStateSystem &state_system)
 
     if (cactus.get_remaining_spike_count() > 0)
     {
-        update_time();
+        update_time_display();
     }
     else
     {
@@ -118,11 +128,23 @@ void Game::run_playing(GameStateSystem &state_system)
 
 void Game::run_restarting(GameStateSystem &state_system)
 {
-    start_game();
-    state_system.change_state(GameState::Playing);
-    clock.restart();
-
+    reset_game();
+    time_display.setString("0.00");
     render_gameplay_entities();
+    if (countdown_clock.getElapsedTime().asSeconds() >= 3.0)
+    {
+        state_system.change_state(GameState::Playing);
+        game_clock.restart();
+    }
+    else
+    {
+        update_countdown_display();
+        window.draw(countdown_display);
+    }
+
+    // empty process all events while restart is happening
+    // otherwise event queue will process grabs when state changes
+    while (window.pollEvent(current_event));
 }
 
 void Game::run_exiting()
@@ -141,6 +163,10 @@ void Game::run_lost(GameStateSystem &state_system)
 
     retry_menu.update(right_hand, left_hand, state_system);
     retry_menu.draw(window);
+
+    if (state_system.get_state() == GameState::Restarting) {
+        countdown_clock.restart();
+    }
 }
 
 void Game::run_won(GameStateSystem &state_system)
@@ -154,6 +180,10 @@ void Game::run_won(GameStateSystem &state_system)
 
     win_menu.update(right_hand, left_hand, state_system);
     win_menu.draw(window);
+
+    if (state_system.get_state() == GameState::Restarting) {
+        countdown_clock.restart();
+    }
 }
 
 void Game::handle_gameplay_events(GameStateSystem &state_system)
@@ -169,12 +199,15 @@ void Game::handle_gameplay_events(GameStateSystem &state_system)
             if (current_event.key.code == sf::Keyboard::W)
             {
                 left_hand.grab();
-            } else if (current_event.key.code == sf::Keyboard::O)
+            }
+            else if (current_event.key.code == sf::Keyboard::O)
             {
                 right_hand.grab();
-            } else if (current_event.key.code == sf::Keyboard::R)
+            }
+            else if (current_event.key.code == sf::Keyboard::R)
             {
                 state_system.change_state(GameState::Restarting);
+                countdown_clock.restart();
             }
         }
     }
@@ -194,10 +227,16 @@ void Game::render_gameplay_entities()
     window.draw(time_display);
 }
 
-void Game::update_time()
+void Game::update_time_display()
 {
-    sf::Int32 elapsed_milliseconds = clock.getElapsedTime().asMilliseconds();
+    sf::Int32 elapsed_milliseconds = game_clock.getElapsedTime().asMilliseconds();
     time_display.setString(std::to_string(elapsed_milliseconds / 1000) + "." + std::to_string(elapsed_milliseconds % 1000 / 10));
+}
+
+void Game::update_countdown_display()
+{
+    int seconds = 3 - static_cast<int>(countdown_clock.getElapsedTime().asSeconds());
+    countdown_display.setString(std::to_string(seconds));
 }
 
 void Game::init_time_display()
@@ -207,7 +246,7 @@ void Game::init_time_display()
     time_display.setPosition(timer_bg_pos.x + 25, timer_bg_pos.y + 48);
 }
 
-void Game::start_game()
+void Game::reset_game()
 {
     right_hand.reset();
     left_hand.reset();
