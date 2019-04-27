@@ -145,7 +145,15 @@ void Game::run_lost(GameStateSystem &state_system)
 
 void Game::run_won(GameStateSystem &state_system)
 {
-    run_lost(state_system);
+    handle_gameplay_events(state_system);
+
+    right_hand.update(cactus, state_system);
+    left_hand.update(cactus, state_system);
+
+    render_gameplay_entities();
+
+    win_menu.update(right_hand, left_hand, state_system);
+    win_menu.draw(window);
 }
 
 void Game::handle_gameplay_events(GameStateSystem &state_system)

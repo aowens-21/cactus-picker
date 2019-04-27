@@ -9,7 +9,7 @@
 #include "RightHand.h"
 #include "Cactus.h"
 #include "LeftHand.h"
-#include "RetryMenu.h"
+#include "WinLoseMenu.h"
 #include "MainMenu.h"
 
 constexpr const float INIT_HAND_Y = 670;
@@ -48,7 +48,8 @@ private:
     bool is_running = true;
 
     // Menu members
-    RetryMenu retry_menu = RetryMenu();
+    WinLoseMenu retry_menu = WinLoseMenu("../images/retry_menu.png");
+    WinLoseMenu win_menu = WinLoseMenu("../images/win_menu.png");
     MainMenu main_menu = MainMenu();
 
     // All of the main game members

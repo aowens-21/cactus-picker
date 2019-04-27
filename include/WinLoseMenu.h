@@ -15,7 +15,7 @@
 const constexpr float BUTTON_WIDTH = 26.0;
 const constexpr float BUTTON_HEIGHT = 45.0;
 
-class RetryMenu {
+class WinLoseMenu {
 private:
     sf::Texture menu_texture;
     sf::Sprite menu_sprite;
@@ -23,7 +23,7 @@ private:
     sf::FloatRect retry_rect;
     sf::FloatRect menu_rect;
 public:
-    RetryMenu();
+    explicit WinLoseMenu(const std::string &texture_path);
 
     void draw(sf::RenderWindow& window);
 

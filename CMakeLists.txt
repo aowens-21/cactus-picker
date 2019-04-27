@@ -4,7 +4,7 @@ project(cactus_picker)
 set(CMAKE_CXX_STANDARD 17)
 
 set(EXECUTABLE_NAME "Cactus_Picker")
-add_executable(${EXECUTABLE_NAME} src/main.cpp include/GameStateSystem.h include/Game.h src/Game.cpp include/LeftHand.h include/RightHand.h include/Cactus.h include/Hand.h src/Hand.cpp src/Cactus.cpp src/RightHand.cpp src/LeftHand.cpp include/Spike.h src/Spike.cpp include/RetryMenu.h src/RetryMenu.cpp src/EffectSystem.cpp include/EffectSystem.h include/MainMenu.h src/MainMenu.cpp)
+add_executable(${EXECUTABLE_NAME} src/main.cpp include/GameStateSystem.h include/Game.h src/Game.cpp include/LeftHand.h include/RightHand.h include/Cactus.h include/Hand.h src/Hand.cpp src/Cactus.cpp src/RightHand.cpp src/LeftHand.cpp include/Spike.h src/Spike.cpp include/WinLoseMenu.h src/WinLoseMenu.cpp src/EffectSystem.cpp include/EffectSystem.h include/MainMenu.h src/MainMenu.cpp)
 
 # Detect and add SFML
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
