@@ -31,6 +31,9 @@ protected:
     // Speed of grab motion
     static constexpr const float GRAB_VELOCITY = 25.0;
 
+    // Window height for bounds checking
+    float min_y = 0.0;
+
     // Sprite for the hand
     sf::Texture texture;
     sf::Sprite sprite;

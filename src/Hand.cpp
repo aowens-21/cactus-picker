@@ -26,6 +26,9 @@ Hand::Hand(float x, float y, const std::string &texture_path)
 
     initial_position.x = x;
     initial_position.y = y;
+
+    // used to clamp the ascension of the hands
+    min_y = rect.height * 2.0f;
 }
 
 void Hand::draw(sf::RenderWindow &window)
@@ -35,15 +38,18 @@ void Hand::draw(sf::RenderWindow &window)
 
 void Hand::process_ascent()
 {
-    // Reset the descent velocity since we aren't yet falling
-    descent_velocity = GRAVITY;
-    // While ascent velocity is not at max, we keep increasing it
-    if (ascent_velocity < MAX_VELOCITY)
+    if (rect.top > min_y)
     {
-        ascent_velocity += ACCELERATION;
-    }
+        // Reset the descent velocity since we aren't yet falling
+        descent_velocity = GRAVITY;
+        // While ascent velocity is not at max, we keep increasing it
+        if (ascent_velocity < MAX_VELOCITY)
+        {
+            ascent_velocity += ACCELERATION;
+        }
 
-    rect.top -= ascent_velocity;
+        rect.top -= ascent_velocity;
+    }
 }
 
 void Hand::process_descent()
