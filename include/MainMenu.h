@@ -9,18 +9,11 @@ class MainMenu
 private:
     sf::Texture texture;
     sf::Sprite sprite;
-
-    sf::IntRect play_button_rect;
-    sf::IntRect quit_button_rect;
-
-    static const constexpr int BUTTON_WIDTH = 329;
-    static const constexpr int BUTTON_HEIGHT = 92;
-    static const constexpr int BUTTON_X = 348;
 public:
     MainMenu();
 
     void draw(sf::RenderWindow &window);
 
-    void handle_click(GameStateSystem &state_system, const sf::RenderWindow &window);
+    void update(GameStateSystem &state_system);
 };
 #endif //CACTUS_PICKER_MAINMENU_H

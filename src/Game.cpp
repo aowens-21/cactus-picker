@@ -93,14 +93,13 @@ void Game::run_main_menu(GameStateSystem &state_system)
     {
         if (current_event.type == sf::Event::Closed) {
             is_running = false;
-        } else if (current_event.type == sf::Event::MouseButtonPressed) {
-            if (current_event.mouseButton.button == sf::Mouse::Left) {
-                main_menu.handle_click(state_system, window);
-                if (state_system.get_state() == GameState::Restarting) {
-                    countdown_clock.restart();
-                }
-            }
         }
+    }
+
+    main_menu.update(state_system);
+
+    if (state_system.get_state() == GameState::Restarting) {
+        countdown_clock.restart();
     }
 
     main_menu.draw(window);

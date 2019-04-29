@@ -4,6 +4,8 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Mouse.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Window/Keyboard.hpp>
 #include "../include/GameStateSystem.h"
 #include "../include/MainMenu.h"
 
@@ -13,17 +15,6 @@ MainMenu::MainMenu()
     texture.loadFromFile("../images/main_menu.png");
     sprite.setTexture(texture);
     sprite.setPosition(0, 0);
-
-    // Set up button rects
-    play_button_rect.left = BUTTON_X;
-    play_button_rect.top = 368;
-    play_button_rect.width = BUTTON_WIDTH;
-    play_button_rect.height = BUTTON_HEIGHT;
-
-    quit_button_rect.left = BUTTON_X;
-    quit_button_rect.top = 538;
-    quit_button_rect.width = BUTTON_WIDTH;
-    quit_button_rect.height = BUTTON_HEIGHT;
 }
 
 void MainMenu::draw(sf::RenderWindow &window)
@@ -31,13 +22,12 @@ void MainMenu::draw(sf::RenderWindow &window)
     window.draw(sprite);
 }
 
-void MainMenu::handle_click(GameStateSystem &state_system, const sf::RenderWindow &window)
+void MainMenu::update(GameStateSystem &state_system)
 {
-    sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
-
-    if (play_button_rect.contains(mouse_pos)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
         state_system.change_state(GameState::Restarting);
-    } else if (quit_button_rect.contains(mouse_pos)) {
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
         state_system.change_state(GameState::Exiting);
     }
 }

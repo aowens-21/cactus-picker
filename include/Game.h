@@ -20,7 +20,6 @@ constexpr const float INIT_CACTUS_Y = 55;
 constexpr const int WINDOW_WIDTH = 1024;
 constexpr const int WINDOW_HEIGHT = 800;
 
-// Singleton to represent the game as a whole, managing the actors and game state
 class Game
 {
 private:

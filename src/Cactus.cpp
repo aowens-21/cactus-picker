@@ -26,7 +26,9 @@ Cactus::Cactus(float x, float y)
     poked_sound_buffer.loadFromFile("../sounds/poked.wav");
     plucked_sound_buffer.loadFromFile("../sounds/plucked_spike.wav");
     poked_sound.setBuffer(poked_sound_buffer);
+    poked_sound.setVolume(50);
     plucked_spike_sound.setBuffer(plucked_sound_buffer);
+    plucked_spike_sound.setVolume(50);
 
     // Set up the spikes
     setup_spikes();
