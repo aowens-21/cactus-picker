@@ -43,6 +43,7 @@ void Cactus::setup_spikes()
     spikes.emplace_back(Spike(rect.left + rect.width + 20, 200, spike_texture, true));
     spikes.emplace_back(Spike(rect.left + rect.width + 25, 500, spike_texture, true));
     spikes.emplace_back(Spike(rect.left + rect.width + 28, 700, spike_texture, true));
+    spikes.emplace_back(Spike(rect.left + rect.width + 25, 300, spike_texture, true));
 }
 
 void Cactus::draw(sf::RenderWindow &window)
