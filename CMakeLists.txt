@@ -7,8 +7,7 @@ set(EXECUTABLE_NAME "Cactus_Picker")
 add_executable(${EXECUTABLE_NAME} src/main.cpp include/GameStateSystem.h include/Game.h src/Game.cpp include/LeftHand.h include/RightHand.h include/Cactus.h include/Hand.h src/Hand.cpp src/Cactus.cpp src/RightHand.cpp src/LeftHand.cpp include/Spike.h src/Spike.cpp include/WinLoseMenu.h src/WinLoseMenu.cpp src/EffectSystem.cpp include/EffectSystem.h include/MainMenu.h src/MainMenu.cpp)
 
 # Add for Windows builds
-#set(SFML_ROOT "C:<insert_path_to_SFML>")
-
+set(SFML_ROOT "~/Downloads/sfml")
 # Detect and add SFML
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 find_package(SFML REQUIRED system window graphics audio)
