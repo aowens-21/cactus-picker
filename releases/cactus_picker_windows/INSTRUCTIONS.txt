@@ -1,0 +1,9 @@
+Cactus Picker - A game about picking a cactus - By Alex Owens
+-------------------------------------------------------------
+Thank you for playing my game! Please leave a comment on Itch.io if you run into any problems and I will try to resolve it as soon as I can.
+
+Instructions:
+- You should be able to simply double click the Cactus_Picker executable in the cactus_picker folder
+
+***IMPORTANT***
+Do not move any of the files around individually, paths are important so the game knows where images and sounds exist. If you want to move the directory then you can move the entire thing and it should be fine.
